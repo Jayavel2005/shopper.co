@@ -5,26 +5,26 @@ let products = [
     category: "Electronics",
     brand: "OnePlus",
     price: 14999,
-    rating: 4.4,
+    rating: 4.5,
     stock: 50,
-    image: "src/assets/images/airpods.png",
+    image: "src/assets/images/ProductImages/airpods.png",
     description: "OnePlus Nord Buds 2 with 25dB Active Noise Cancellation, 12.4mm drivers, fast charging, and up to 36 hours of battery life.",
-    tags: ["wireless", "earbuds", "budget", "ANC", "OnePlus"]
-  }
-  ,
+    tags: ["wireless", "earbuds", "budget", "ANC", "OnePlus"],
+    offer: "10% off"
+  },
   {
     id: 2,
     name: "Safari Quill Laptop Backpack",
     category: "Bags",
     brand: "Safari",
     price: 1299,
-    rating: 4.3,
+    rating: 3.5,
     stock: 40,
-    image: "src/assets/images/bag.png",
+    image: "src/assets/images/ProductImages/bag.png",
     description: "Safari Quill unisex laptop backpack with 3 compartments, water-resistant fabric, and padded shoulder straps. Ideal for work, college, and travel.",
-    tags: ["backpack", "safari", "laptop", "unisex", "college"]
-  }
-  ,
+    tags: ["backpack", "safari", "laptop", "unisex", "college"],
+    offer: "15% off"
+  },
   {
     id: 3,
     name: "Green Soul Jupiter Office Chair",
@@ -33,22 +33,23 @@ let products = [
     price: 6999,
     rating: 4.5,
     stock: 25,
-    image: "src/assets/images/chair.png",
+    image: "src/assets/images/ProductImages/chair.png",
     description: "Ergonomic office chair with adjustable headrest, lumbar support, breathable mesh, and 360-degree swivel for all-day comfort.",
-    tags: ["chair", "ergonomic", "office", "mesh", "greensoul"]
-  }
-  ,
+    tags: ["chair", "ergonomic", "office", "mesh", "greensoul"],
+    offer: "12% off"
+  },
   {
     id: 4,
     name: "iPhone 14",
     category: "Electronics",
     brand: "Apple",
     price: 69999,
-    rating: 4.7,
+    rating: 4.0,
     stock: 18,
-    image: "src/assets/images/iphone.png",
+    image: "src/assets/images/ProductImages/iphone.png",
     description: "Apple iPhone 14 with 6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system, and crash detection feature.",
-    tags: ["smartphone", "apple", "iphone", "ios", "flagship"]
+    tags: ["smartphone", "apple", "iphone", "ios", "flagship"],
+    offer: "5% off"
   },
   {
     id: 5,
@@ -56,11 +57,12 @@ let products = [
     category: "Clothing",
     brand: "Zara",
     price: 3499,
-    rating: 4.4,
+    rating: 4.5,
     stock: 22,
-    image: "src/assets/images/beigeCoat.png",
+    image: "src/assets/images/ProductImages/beigeCoat.png",
     description: "Elegant beige belted trench coat with a classic lapel collar, waist tie, and long sleeves. Perfect for layering in autumn and winter.",
-    tags: ["coat", "trench", "beige", "women", "fashion"]
+    tags: ["coat", "trench", "beige", "women", "fashion"],
+    offer: "20% off"
   },
   {
     id: 7,
@@ -68,25 +70,27 @@ let products = [
     category: "Electronics",
     brand: "boAt",
     price: 1499,
-    rating: 4.3,
+    rating: 5.0,
     stock: 35,
-    image: "src/assets/images/headphone.png",
+    image: "src/assets/images/ProductImages/headphone.png",
     description: "boAt Rockerz 450 wireless on-ear headphones with immersive audio, adjustable headband, 15-hour playback, and dual connectivity (Bluetooth & AUX).",
-    tags: ["headphones", "wireless", "boat", "audio", "bluetooth"]
-  }
-  , {
+    tags: ["headphones", "wireless", "boat", "audio", "bluetooth"],
+    offer: "18% off"
+  },
+  {
     id: 8,
     name: "Fossil Grant Chronograph Leather Watch",
     category: "Accessories",
     brand: "Fossil",
     price: 8995,
-    rating: 4.6,
+    rating: 4.0,
     stock: 20,
-    image: "src/assets/images/leather watch.png",
+    image: "src/assets/images/ProductImages/leather watch.png",
     description: "Premium Fossil Grant chronograph watch with a genuine brown leather strap, stainless steel case, Roman numeral markers, and water resistance up to 50 meters.",
-    tags: ["watch", "leather", "fossil", "chronograph", "premium"]
-  }
-  , {
+    tags: ["watch", "leather", "fossil", "chronograph", "premium"],
+    offer: "25% off"
+  },
+  {
     id: 9,
     name: "Redragon K552 Kumara RGB Mechanical Gaming Keyboard",
     category: "Electronics",
@@ -94,23 +98,25 @@ let products = [
     price: 2899,
     rating: 4.5,
     stock: 28,
-    image: "src/assets/images/mechanical keyboard.png",
+    image: "src/assets/images/ProductImages/mechanical keyboard.png",
     description: "Compact mechanical gaming keyboard with custom mechanical switches, RGB backlighting, metal construction, and anti-ghosting for precise gaming performance.",
-    tags: ["keyboard", "mechanical", "gaming", "rgb", "redragon"]
-  }
-  ,
+    tags: ["keyboard", "mechanical", "gaming", "rgb", "redragon"],
+    offer: "10% off"
+  },
   {
     id: 10,
     name: "Titan Black Metallic Analog Watch",
     category: "Accessories",
     brand: "Titan",
     price: 7499,
-    rating: 4.4,
+    rating: 4.0,
     stock: 18,
-    image: "src/assets/images/metalic watch.png",
+    image: "src/assets/images/ProductImages/metalic watch.png",
     description: "Elegant Titan analog watch featuring a full black metallic strap and dial, quartz movement, scratch-resistant glass, and water resistance up to 50 meters.",
-    tags: ["watch", "metallic", "black", "titan", "accessory"]
-  }, {
+    tags: ["watch", "metallic", "black", "titan", "accessory"],
+    offer: "15% off"
+  },
+  {
     id: 11,
     name: "Nike Court Royale 2 White Sneakers",
     category: "Footwear",
@@ -118,32 +124,24 @@ let products = [
     price: 4295,
     rating: 4.5,
     stock: 30,
-    image: "src/assets/images/sneaker.png",
+    image: "src/assets/images/ProductImages/sneaker.png",
     description: "Classic white sneakers from Nike featuring a retro tennis-inspired design, durable synthetic leather upper, and comfortable cushioned sole for everyday wear.",
-    tags: ["sneakers", "white", "nike", "footwear", "casual"]
-  }
-
-
-  , {
+    tags: ["sneakers", "white", "nike", "footwear", "casual"],
+    offer: "30% off"
+  },
+  {
     id: 12,
     name: "Tommy Hilfiger Premium Brown Leather Wallet",
     category: "Accessories",
     brand: "Tommy Hilfiger",
     price: 2499,
-    rating: 4.6,
+    rating: 3.5,
     stock: 40,
-    image: "src/assets/images/wallet.png",
+    image: "src/assets/images/ProductImages/wallet.png",
     description: "Premium quality brown leather wallet by Tommy Hilfiger featuring a slim design, multiple card slots, a coin pouch, and embossed branding.",
-    tags: ["wallet", "leather", "brown", "tommy", "premium"]
+    tags: ["wallet", "leather", "brown", "tommy", "premium"],
+    offer: "20% off"
   }
-
-
-
-
-
-
-
 ];
-
 
 export default products;
