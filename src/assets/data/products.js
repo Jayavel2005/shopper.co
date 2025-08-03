@@ -41,7 +41,7 @@ let products = [
   {
     id: 4,
     name: "iPhone 14",
-    category: "Electronics",
+    category: "Mobiles",
     brand: "Apple",
     price: 69999,
     rating: 4.0,

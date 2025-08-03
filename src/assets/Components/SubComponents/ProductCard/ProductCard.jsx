@@ -1,17 +1,17 @@
 import React from 'react'
 
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, AddToWishList, isWishListed }) => {
     return (
-        <div className='shadow rounded-[5px] hover:scale-101 transition-all duration-200 ease-in-out cursor-pointer '>
+        <div className='shadow rounded-[5px] cursor-pointer '>
 
             <div className='p-2 relative flex justify-center items-end'>
                 <img src={`${product.image}`} alt="product Name" className='rounded-[5px] w-full' />
                 <div className='flex gap-3 absolute bottom-5'>
-                    <div className="tooltip w-10 h-10 bg-white rounded-full flex items-center justify-center" data-tip="Add to Wish list" >
-                        <i className='bi bi-heart-fill text-lg text-red-500'></i>
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center" onClick={() => AddToWishList(product)}>
+                        <i className={`${isWishListed ? 'bi bi-heart-fill text-red-600' : 'bi bi-heart'}`}></i>
                     </div>
-                    <div className='tooltip w-10 h-10 bg-white rounded-full flex items-center justify-center' data-tip="Add to Cart">
+                    <div className='tooltip w-10 h-10 bg-white rounded-full flex items-center justify-center' >
                         <i className="bi bi-cart-plus text-xl"></i>
                     </div>
                 </div>
