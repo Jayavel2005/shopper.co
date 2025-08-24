@@ -4,7 +4,7 @@ let products = [
     name: "OnePlus Nord Buds 2",
     category: "Electronics",
     brand: "OnePlus",
-    price: 14999,
+    price: 999,
     rating: 4.5,
     stock: 50,
     image: "src/assets/images/ProductImages/airpods.png",
@@ -65,7 +65,7 @@ let products = [
     offer: "20% off"
   },
   {
-    id: 7,
+    id: 6,
     name: "boAt Rockerz 450 Wireless Headphones",
     category: "Electronics",
     brand: "boAt",
@@ -78,7 +78,7 @@ let products = [
     offer: "18% off"
   },
   {
-    id: 8,
+    id: 7,
     name: "Fossil Grant Chronograph Leather Watch",
     category: "Accessories",
     brand: "Fossil",
@@ -91,7 +91,7 @@ let products = [
     offer: "25% off"
   },
   {
-    id: 9,
+    id: 8,
     name: "Redragon K552 Kumara RGB Mechanical Gaming Keyboard",
     category: "Electronics",
     brand: "Redragon",
@@ -104,7 +104,7 @@ let products = [
     offer: "10% off"
   },
   {
-    id: 10,
+    id: 9,
     name: "Titan Black Metallic Analog Watch",
     category: "Accessories",
     brand: "Titan",
@@ -117,7 +117,7 @@ let products = [
     offer: "15% off"
   },
   {
-    id: 11,
+    id: 10,
     name: "Nike Court Royale 2 White Sneakers",
     category: "Footwear",
     brand: "Nike",
@@ -130,7 +130,7 @@ let products = [
     offer: "30% off"
   },
   {
-    id: 12,
+    id: 11                                                                                     ,
     name: "Tommy Hilfiger Premium Brown Leather Wallet",
     category: "Accessories",
     brand: "Tommy Hilfiger",

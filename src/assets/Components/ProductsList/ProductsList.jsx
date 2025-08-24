@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import ProductCard from '../SubComponents/ProductCard/ProductCard';
 import products from '../../data/products';
 import { ToastContainer, toast } from 'react-toastify';
+import ProductDetails from '../ProductDetails/ProductDetails';
 
-const ProductsList = () => {
+const ProductsList = ({ onBack }) => {
     const categories = [
         "All",
         "Electronics",
@@ -45,36 +46,41 @@ const ProductsList = () => {
 
         }
     };
+    const [selecetdProduct, setSelectedProduct] = useState(null);
 
 
     console.log(wishlist);
+    console.log(selecetdProduct);
+
 
     return (
         <section>
-            <div>
-                <p className='text-center text-3xl my-2 font-semibold text-[#28262C] underline underline-offset-3 decoration-[#8754ff]'>
-                    Categories
-                </p>
-                <div className='flex justify-center gap-2 my-4 flex-wrap'>
-                    {categories.map((category, index) => (
-                        <div
-                            key={index}
-                            onClick={() => handleCategorySelect(category)}
-                            className={`inline-block p-1 rounded-full px-5 border text-sm cursor-pointer transition-all 
+            {selecetdProduct ? <ProductDetails selectedProductdetail={selecetdProduct} removeSeletecdProduct={() => setSelectedProduct(null)}/> : <>
+                <button className='flex items-center gap-1 p-1 text-[#8754ff] cursor-pointer' onClick={onBack}><i className="bi bi-arrow-left-circle-fill text-xl"></i> Back to home</button>
+                <div>
+                    <p className='text-center text-3xl my-2 font-semibold text-[#28262C] underline underline-offset-3 decoration-[#8754ff]'>
+                        Categories
+                    </p>
+                    <div className='flex justify-center gap-2 my-4 flex-wrap'>
+                        {categories.map((category, index) => (
+                            <div
+                                key={index}
+                                onClick={() => handleCategorySelect(category)}
+                                className={`inline-block p-1 rounded-full px-5 border text-sm cursor-pointer transition-all 
             ${activeCategory === category ? "bg-[#8754ff] text-white border-[#8754ff]" : "bg-[#ECE3FF] border-[#C2A6FF] text-black hover:bg-[#e6dbff] hover:border-[#bb9cff]"}`}
-                        >
-                            {category}
-                        </div>
-                    ))}
+                            >
+                                {category}
+                            </div>
+                        ))}
 
+                    </div>
                 </div>
-            </div>
-            <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-6'>
-                {selectedCategory.map((product, index) => (
-                    <ProductCard key={index} product={product} AddToWishList={toggleWishList} isWishListed={wishlist.some(item => item.id === product.id)} />
-                ))}
-            </div>
-            <ToastContainer />
+                <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-6'>
+                    {selectedCategory.map((product, index) => (
+                        <ProductCard key={index} product={product} AddToWishList={toggleWishList} isWishListed={wishlist.some(item => item.id === product.id)} setProductDetails={() => setSelectedProduct(product)} />
+                    ))}
+                </div>
+                <ToastContainer /></>}
         </section>
     );
 };

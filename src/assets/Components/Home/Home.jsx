@@ -7,12 +7,19 @@ import lowestPrice from "../../images/Icons/lowest-price.svg"
 
 
 
-const Ad = () => {
+const Home = ({ onNavigate }) => {
     return (
         <div className='my-3 text-center'>
             <Badge badgeContent="🎉 Festival Deal: Free shipping on all orders above ₹999!" />
 
-            <img src={banner} alt="" className='block mx-auto my-5 w-full' />
+            <div className='relative flex justify-center items-center'>
+                <div className='absolute inline-flex items-center justify-center flex-col'>
+                    <p className='text-5xl font-extrabold text-info my-1'>Grab the Exciting Products </p>
+                    <button className='btn border-none shadow-none bg-[#8754ff] my-1 text-white' onClick={onNavigate}>Shop Products</button>
+                </div>
+                <img src={banner} alt="" className='block mx-auto my-5 w-full' />
+
+            </div>
 
             <div className='bg-[#F7F3FF] flex justify-center py-1 rounded-[5px]'>
                 <div className='flex gap-10'>
@@ -26,4 +33,4 @@ const Ad = () => {
     )
 }
 
-export default Ad
+export default Home

@@ -1,12 +1,12 @@
 import React from 'react'
 
 
-const ProductCard = ({ product, AddToWishList, isWishListed }) => {
+const ProductCard = ({ product, AddToWishList, isWishListed, setProductDetails }) => {
     return (
-        <div className='shadow rounded-[5px] cursor-pointer '>
+        <div className='shadow rounded-[5px] cursor-pointer ' >
 
-            <div className='p-2 relative flex justify-center items-end'>
-                <img src={`${product.image}`} alt="product Name" className='rounded-[5px] w-full' />
+            <div className='p-2 relative flex justify-center items-end' >
+                <img src={`${product.image}`} alt="product Name" className='rounded-[5px] w-full' onClick={setProductDetails} />
                 <div className='flex gap-3 absolute bottom-5'>
                     <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center" onClick={() => AddToWishList(product)}>
                         <i className={`${isWishListed ? 'bi bi-heart-fill text-red-600' : 'bi bi-heart'}`}></i>
