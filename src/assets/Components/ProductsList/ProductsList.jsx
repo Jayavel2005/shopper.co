@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ProductCard from '../SubComponents/ProductCard/ProductCard';
 import products from '../../data/products';
 import { ToastContainer, toast } from 'react-toastify';
 import ProductDetails from '../ProductDetails/ProductDetails';
+import { WishListContext } from '../../Context/WishListContext';
 
 const ProductsList = ({ onBack }) => {
     const categories = [
@@ -17,7 +18,9 @@ const ProductsList = ({ onBack }) => {
 
     const [selectedCategory, setSelectedCategory] = useState(products);
     const [activeCategory, setActiveCategory] = useState("All");
-    const [wishlist, setWishlist] = useState([])
+
+    const { wishList } = useContext(WishListContext);
+    console.log({wishList});
 
 
 
@@ -32,30 +35,30 @@ const ProductsList = ({ onBack }) => {
         }
     };
 
-    const toggleWishList = (product) => {
-        const isWishListed = wishlist.find(item => item.id === product.id);
-        if (isWishListed) {
-            setWishlist(wishlist.filter(item => item.id !== product.id))
-            toast.info("Product is removed to My Wishlist")
+    // const toggleWishList = (product) => {
+    //     const isWishListed = wishlist.find(item => item.id === product.id);
+    //     if (isWishListed) {
+    //         setWishlist(wishlist.filter(item => item.id !== product.id))
+    //         toast.info("Product is removed to My Wishlist")
 
 
-        } else {
-            setWishlist([...wishlist, product])
-            toast.info("Product is added to My Wishlist")
+    //     } else {
+    //         setWishlist([...wishlist, product])
+    //         toast.info("Product is added to My Wishlist")
 
 
-        }
-    };
+    //     }
+    // };
     const [selecetdProduct, setSelectedProduct] = useState(null);
 
 
-    console.log(wishlist);
+    // console.log(wishlist);
     console.log(selecetdProduct);
 
 
     return (
         <section>
-            {selecetdProduct ? <ProductDetails selectedProductdetail={selecetdProduct} removeSeletecdProduct={() => setSelectedProduct(null)}/> : <>
+            {selecetdProduct ? <ProductDetails selectedProductdetail={selecetdProduct} removeSeletecdProduct={() => setSelectedProduct(null)} /> : <>
                 <button className='flex items-center gap-1 p-1 text-[#8754ff] cursor-pointer' onClick={onBack}><i className="bi bi-arrow-left-circle-fill text-xl"></i> Back to home</button>
                 <div>
                     <p className='text-center text-3xl my-2 font-semibold text-[#28262C] underline underline-offset-3 decoration-[#8754ff]'>
@@ -77,7 +80,7 @@ const ProductsList = ({ onBack }) => {
                 </div>
                 <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-1 gap-6'>
                     {selectedCategory.map((product, index) => (
-                        <ProductCard key={index} product={product} AddToWishList={toggleWishList} isWishListed={wishlist.some(item => item.id === product.id)} setProductDetails={() => setSelectedProduct(product)} />
+                        <ProductCard key={index} product={product} setProductDetails={() => setSelectedProduct(product)} />
                     ))}
                 </div>
                 <ToastContainer /></>}

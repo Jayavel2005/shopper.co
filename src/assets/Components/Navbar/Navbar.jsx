@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from "../../images/Icons/shopping-bag.png"
-const Navbar = ({ onNavigate }) => {
+const Navbar = () => {
     return (
         <nav className='shadow p-2 px-5 flex items-center justify-between'>
             <div className='inline-flex items-center justify-center  px-1'>

@@ -1,15 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { WishListContext } from '../../../Context/WishListContext';
 
 
-const ProductCard = ({ product, AddToWishList, isWishListed, setProductDetails }) => {
+const ProductCard = ({ product, setProductDetails }) => {
+
+    const { addToWishList, removeFromWishList, wishList, isWishListed } = useContext(WishListContext);
+
+
+
+
     return (
         <div className='shadow rounded-[5px] cursor-pointer ' >
 
             <div className='p-2 relative flex justify-center items-end' >
                 <img src={`${product.image}`} alt="product Name" className='rounded-[5px] w-full' onClick={setProductDetails} />
                 <div className='flex gap-3 absolute bottom-5'>
-                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center" onClick={() => AddToWishList(product)}>
-                        <i className={`${isWishListed ? 'bi bi-heart-fill text-red-600' : 'bi bi-heart'}`}></i>
+                    <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center" onClick={() => addToWishList(product)}>
+                        <i className={`${wishList.some((item) => item.id === product.id) ? 'bi bi-heart-fill' : 'bi bi-heart'}  text-red-600 `}></i>
                     </div>
                     <div className='tooltip w-10 h-10 bg-white rounded-full flex items-center justify-center' >
                         <i className="bi bi-cart-plus text-xl"></i>
@@ -30,7 +37,7 @@ const ProductCard = ({ product, AddToWishList, isWishListed, setProductDetails }
                 <button className='p-2 bg-[#9565FF] text-white my-1 w-full rounded-[5px] cursor-pointer hover:bg-[#8754ff]'>Buy Now</button>
             </div>
 
-        </div>
+        </div >
     )
 }
 

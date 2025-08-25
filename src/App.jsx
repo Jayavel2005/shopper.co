@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import SignUp from './assets/Components/SignUp/SignUp'
-import Login from './assets/Components/Login/Login'
 import Navbar from './assets/Components/Navbar/Navbar'
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import WishList from './assets/Components/WishList/WishList';
+import WishListContextProvider from './assets/Context/WishListContext';
 import Home from './assets/Components/Home/Home';
-import ProductCard from './assets/Components/SubComponents/ProductCard/ProductCard';
 import ProductsList from './assets/Components/ProductsList/ProductsList';
-import ProductDetails from './assets/Components/ProductDetails/ProductDetails';
+
+
 
 const App = () => {
 
@@ -17,8 +17,11 @@ const App = () => {
     <div>
       <Navbar />
       <section className='px-2 my-4'>
-        {activePage === 'home' && <Home onNavigate={() => setActivePage("products")}/>}
-        {activePage === 'products' && <ProductsList onBack={() => setActivePage("home")} />}
+        {activePage === 'home' && <Home onNavigate={() => setActivePage("products")} />}
+        <WishListContextProvider>
+          {activePage === 'products' && <ProductsList onBack={() => setActivePage("home")} />}
+          <WishList />
+        </WishListContextProvider>
 
       </section>
     </div>
