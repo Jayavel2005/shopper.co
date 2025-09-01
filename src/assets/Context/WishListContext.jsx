@@ -30,13 +30,13 @@ const WishListContextProvider = (props) => {
     }
 
 
-    // (function isWishListed(product) {
-    //     wishList.some(item => item.id = product.id)
-    // })()
+    const clearWishList = () => {
+        setWishList([])
+    }
 
 
     return (
-        <WishListContext.Provider value={{ wishList, addToWishList, removeFromWishList }}>
+        <WishListContext.Provider value={{ wishList, addToWishList, removeFromWishList,clearWishList }}>
             {props.children}
         </WishListContext.Provider>
     )

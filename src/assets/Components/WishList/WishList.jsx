@@ -1,141 +1,129 @@
-import React, { useContext } from 'react'
-import { Heart, Laptop, Shirt, House, Dumbbell } from "lucide-react"
+import React, { useContext, useState } from 'react'
+import { Heart, Laptop, Shirt, Trash, Trash2, Backpack, Sofa, Glasses, Footprints } from "lucide-react"
 import { WishListContext } from '../../Context/WishListContext'
 
 const WishList = () => {
+    const { wishList, removeFromWishList, clearWishList } = useContext(WishListContext);
 
-    const { wishList } = useContext(WishListContext);
+    const categories = [
+        { type: "All", icon: <Heart /> },
+        { type: "Electronics", icon: <Laptop /> },
+        { type: "Bags", icon: <Backpack /> },
+        { type: "Furniture", icon: <Sofa /> },
+        { type: "Clothing", icon: <Shirt /> },
+        { type: "Accessories", icon: <Glasses /> },
+        { type: "Footwear", icon: <Footprints /> },
+    ];
 
-    console.log(wishList);
-    
+    const [selectedCategory, setSelectedCategory] = useState("All");
 
-    // const products = [
-    //     {
-    //         id: 1,
-    //         name: "Wireless Earbuds",
-    //         category: "Electronics",
-    //         price: 1999,
-    //         stock: 20
-    //     },
-    //     {
-    //         id: 2,
-    //         name: "Smartphone Stand",
-    //         category: "Accessories",
-    //         price: 499,
-    //         stock: 50
-    //     },
-    //     {
-    //         id: 3,
-    //         name: "Bluetooth Speaker",
-    //         category: "Electronics",
-    //         price: 2499,
-    //         stock: 15
-    //     },
-    //     {
-    //         id: 4,
-    //         name: "Gaming Mouse",
-    //         category: "Computers",
-    //         price: 1299,
-    //         stock: 35
-    //     },
-    //     {
-    //         id: 5,
-    //         name: "Mechanical Keyboard",
-    //         category: "Computers",
-    //         price: 2999,
-    //         stock: 25
-    //     },
-    //     {
-    //         id: 6,
-    //         name: "Smart Watch",
-    //         category: "Wearables",
-    //         price: 3999,
-    //         stock: 18
-    //     },
-    //     {
-    //         id: 7,
-    //         name: "Portable Power Bank",
-    //         category: "Electronics",
-    //         price: 1499,
-    //         stock: 40
-    //     },
-    //     {
-    //         id: 8,
-    //         name: "USB-C Cable",
-    //         category: "Accessories",
-    //         price: 299,
-    //         stock: 100
-    //     },
-    //     {
-    //         id: 9,
-    //         name: "Laptop Cooling Pad",
-    //         category: "Computers",
-    //         price: 899,
-    //         stock: 22
-    //     },
-    //     {
-    //         id: 10,
-    //         name: "LED Desk Lamp",
-    //         category: "Home",
-    //         price: 1199,
-    //         stock: 30
-    //     }
-    // ];
+    function handleFilteredCategory(category) {
+        setSelectedCategory(category);
+    }
+
+    const filteredCategory =
+        selectedCategory === "All"
+            ? wishList
+            : wishList.filter(product => product.category === selectedCategory);
 
     return (
-        <div className=''>
-            <section className='flex gap-5 items-start'>
+        <div className="space-y-4">
+            {/* Clear Wishlist Button */}
+            <div className="shadow p-2 my-2">
+                <button
+                    className="text-sm flex items-center gap-2 py-1 text-white hover:bg-red-600 bg-red-500 rounded-full px-4 transition"
+                    onClick={() => clearWishList()}
+                >
+                    Clear Wishlist <Trash2 width={15} />
+                </button>
+            </div>
 
-                {/* Category section*/}
-                <div className='shadow-md px-4 py-5 rounded-lg w-64 sticky top-6'>
-                    <h3 className='font-semibold text-xl'>Categories</h3>
-                    <ul className='my-2 flex flex-col ms-3'>
-                        <li className='my-2 inline-flex gap-2 p-2 text-red-500 font-semibold rounded-md bg-rose-100'><Heart /> All Items </li>
-                        <li className='my-2 inline-flex gap-2 p-2 text-neutral-700 rounded-md'><Laptop /> Electronics</li>
-                        <li className='my-2 inline-flex gap-2 p-2 text-neutral-700 rounded-md'><Shirt /> Fashion</li>
-                        <li className='my-2 inline-flex gap-2 p-2 text-neutral-700 rounded-md'><House /> Home & Living</li>
-                        <li className='my-2 inline-flex gap-2 p-2 text-neutral-700 rounded-md'><Dumbbell /> Sports</li>
+            <section className="flex gap-5 items-start">
+                {/* Category section */}
+                <div className="shadow-md px-4 py-5 rounded-lg w-64 sticky top-6">
+                    <h3 className="font-semibold text-xl">Categories</h3>
+                    <ul className="my-3 flex flex-col ml-2">
+                        {categories.map((category) => (
+                            <li
+                                key={category.type}
+                                className={`my-1 inline-flex cursor-pointer items-center gap-2 p-2 rounded-md transition 
+                  ${selectedCategory === category.type
+                                        ? "bg-rose-100 text-red-500 font-semibold"
+                                        : "text-neutral-700 hover:bg-neutral-100"
+                                    }`}
+                                onClick={() => handleFilteredCategory(category.type)}
+                            >
+                                {category.icon} {category.type}
+                            </li>
+                        ))}
                     </ul>
                 </div>
 
-
-
                 {/* Wishlist Items */}
-
-                <div className='p-3 rounded-lg'>
-                    {/* wishlist item card */}
-                    {wishList.map((product, index) => (
-                        <div className='shadow-md rounded-md p-2 flex gap-5 my-4 ' key={index}>
-
-                            <div>
-                                <img src={product.image} alt="" className='w-24 h-24 rounded-lg' />
-                            </div>
-
-                            <div>
-                                <h3 className='text-xl font-semibold'>{product.name}</h3>
-
-                                <p>{product.description}</p>
-
-                                <div className='flex items-center my-1 gap-1'>
-                                    <img src={`src/assets/images/StarRatings/rating-${product.rating * 10}.png`} alt="" className='w-20' />
-                                    <span className='text-xs'>({product.rating})</span>
-                                </div>
-                                <div className='inline-flex items-center justify-center gap-2'>
-
-                                    <span className='text-lg font-semibold'>₹{Math.floor(product.price - product.price * (15/100))}</span>
-                                    <del className='text-neutral-600 text-xs'>₹{product.price}</del>
-                                    <span className='bg-purple-300 text-xs px-2 py-1 rounded-full'>{product.offer}</span>
-                                </div>
-
-                            </div>
+                <div className="flex-1 p-3 rounded-lg">
+                    {filteredCategory.length === 0 ? (
+                        <div className="w-full py-20 flex items-center justify-center">
+                            <p className="text-neutral-500 text-lg">Your wishlist is empty.</p>
                         </div>
+                    ) : (
+                        filteredCategory.map((product) => (
+                            <div
+                                key={product.id || product.name}
+                                className="shadow-md rounded-md p-3 flex gap-5 items-center justify-between my-4 hover:scale-[1.01] transition"
+                            >
+                                {/* Product Image */}
+                                <div>
+                                    <img
+                                        src={product.image}
+                                        alt={product.name}
+                                        className="w-24 h-24 rounded-lg object-cover object-center"
+                                    />
+                                </div>
 
-                    ))}
+                                {/* Product Info */}
+                                <div className="flex-1">
+                                    <h3 className="text-lg font-semibold">{product.name}</h3>
+                                    <p className="text-sm text-neutral-600">{product.description}</p>
+
+                                    <div className="flex items-center my-1 gap-2">
+                                        <img
+                                            src={`src/assets/images/StarRatings/rating-${product.rating * 10}.png`}
+                                            alt="rating"
+                                            className="w-20"
+                                        />
+                                        <span className="text-xs text-neutral-500">
+                                            ({product.rating})
+                                        </span>
+                                    </div>
+
+                                    <div className="inline-flex items-center gap-2">
+                                        <span className="text-lg font-semibold text-green-600">
+                                            ₹{Math.floor(product.price - product.price * (15 / 100))}
+                                        </span>
+                                        <del className="text-neutral-500 text-xs">₹{product.price}</del>
+                                        {product.offer && (
+                                            <span className="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full">
+                                                {product.offer}
+                                            </span>
+                                        )}
+                                    </div>
+                                </div>
+
+                                {/* Remove Button */}
+                                <button
+                                    onClick={() => removeFromWishList(product)}
+                                    className="cursor-pointer hover:scale-110 transition"
+                                    title="Remove from Wishlist"
+                                >
+                                    <Trash color="red" />
+                                </button>
+                            </div>
+                        ))
+                    )}
                 </div>
-
             </section>
         </div>
-    )
-}
+    );
+};
 
-export default WishList
+export default WishList;

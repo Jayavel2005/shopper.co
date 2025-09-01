@@ -1,6 +1,6 @@
 import React, { use, useState } from 'react';
 
-export default function App() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -61,7 +61,7 @@ export default function App() {
 
   return (
     // Your UI and colors are preserved.
-    <div className='h-screen flex justify-center items-center bg-gray-200'>
+    <div className='h-screen flex justify-center items-center'>
       <form className='bg-[#e0d3ffcd] border border-[#C2A6FF] rounded-[5px] w-full max-w-md p-2' onSubmit={handleLogin} noValidate>
         <h1 className='text-center text-[#28262C] font-bold text-3xl mt-4'>LOG IN</h1>
         <div className='px-5 my-5'>
@@ -107,3 +107,6 @@ export default function App() {
     </div>
   );
 }
+
+
+export default Login

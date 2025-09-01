@@ -1,11 +1,12 @@
 import React, { useContext, useState } from 'react';
 import ProductCard from '../SubComponents/ProductCard/ProductCard';
 import products from '../../data/products';
-import { ToastContainer, toast } from 'react-toastify';
 import ProductDetails from '../ProductDetails/ProductDetails';
 import { WishListContext } from '../../Context/WishListContext';
+import { useNavigate } from 'react-router-dom';
 
-const ProductsList = ({ onBack }) => {
+
+const ProductsList = () => {
     const categories = [
         "All",
         "Electronics",
@@ -20,8 +21,7 @@ const ProductsList = ({ onBack }) => {
     const [activeCategory, setActiveCategory] = useState("All");
 
     const { wishList } = useContext(WishListContext);
-    console.log({wishList});
-
+    const navigate = useNavigate();
 
 
 
@@ -59,7 +59,7 @@ const ProductsList = ({ onBack }) => {
     return (
         <section>
             {selecetdProduct ? <ProductDetails selectedProductdetail={selecetdProduct} removeSeletecdProduct={() => setSelectedProduct(null)} /> : <>
-                <button className='flex items-center gap-1 p-1 text-[#8754ff] cursor-pointer' onClick={onBack}><i className="bi bi-arrow-left-circle-fill text-xl"></i> Back to home</button>
+                <button className='flex items-center gap-1 p-1 text-[#8754ff] cursor-pointer' onClick={() => navigate('/')}><i className="bi bi-arrow-left-circle-fill text-xl"></i> Back to home</button>
                 <div>
                     <p className='text-center text-3xl my-2 font-semibold text-[#28262C] underline underline-offset-3 decoration-[#8754ff]'>
                         Categories
@@ -83,7 +83,7 @@ const ProductsList = ({ onBack }) => {
                         <ProductCard key={index} product={product} setProductDetails={() => setSelectedProduct(product)} />
                     ))}
                 </div>
-                <ToastContainer /></>}
+            </>}
         </section>
     );
 };
