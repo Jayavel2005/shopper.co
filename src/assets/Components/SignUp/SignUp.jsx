@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { auth } from '../../../lib/firebase';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 
-
-export default function App() {
+const SignUp = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -12,6 +15,10 @@ export default function App() {
         emailErrorMessage: "",
         passwordErrorMessage: ""
     });
+
+    // Navigate Context
+
+    const navigate = useNavigate()
 
 
 
@@ -80,7 +87,7 @@ export default function App() {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const isNameValid = validateName(name);
@@ -90,6 +97,23 @@ export default function App() {
         if (isNameValid && isEmailValid && isPasswordValid) {
 
             localStorage.setItem('user', JSON.stringify({ name, email, password }));
+            try {
+                const user = await createUserWithEmailAndPassword(auth, email, password)
+
+
+                console.log(user.displayName);
+
+                await updateProfile(auth.currentUser, {
+                    displayName: name
+                })
+
+                toast.success("Successfully Signed Up!")
+
+                navigate('/products')
+            } catch (error) {
+                toast.error(error.message);
+                console.log(error);
+            }
 
         } else {
             console.log("Form has errors. Please correct them.");
@@ -98,7 +122,7 @@ export default function App() {
 
     return (
         // Your UI and colors are preserved.
-        <div className='h-screen flex justify-center items-center bg-gray-200'>
+        <div className='h-screen flex justify-center items-center'>
             <form className='bg-[#e0d3ffcd] border border-[#C2A6FF] rounded-[5px] w-full max-w-md p-2' onSubmit={handleSubmit} noValidate>
                 <h1 className='text-center text-[#28262C] font-bold text-3xl mt-4'>SIGN UP</h1>
                 <div className='px-5 my-5'>
@@ -123,9 +147,12 @@ export default function App() {
 
                     <button type="submit" className='block mx-auto p-2 bg-[#9565FF] w-full my-1 rounded-[5px] font-semibold text-white'>SIGN UP</button>
 
-                    <p className='text-center text-sm mt-3 text-gray-800'>Already have an account? <a href="#" className='text-[#6600FF]'>login</a></p>
+                    <p className='text-center text-sm mt-3 text-gray-800'>Already have an account? <a href="#" className='text-[#6600FF]' onClick={() => navigate('/login')}>login</a></p>
                 </div>
             </form>
         </div>
     );
 }
+
+
+export default SignUp

@@ -8,6 +8,8 @@ import ProductsList from './assets/Components/ProductsList/ProductsList';
 import { Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import Login from "./assets/Components/Login/Login"
+import SignUp from './assets/Components/SignUp/SignUp';
+
 
 
 const App = () => {
@@ -18,8 +20,9 @@ const App = () => {
         {/* The context provider should wrap the routes that need access to it */}
         <WishListContextProvider>
           <Routes>
-            <Route path='/login' element={<Login />} />
             <Route path='/' element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<SignUp />} />
             <Route path='/products' element={<ProductsList />} />
             <Route path='/wishlist' element={<WishList />} />
           </Routes>

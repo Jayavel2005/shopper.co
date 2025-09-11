@@ -1,112 +1,142 @@
-import React, { use, useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { AuthContext } from '../../Context/AuthContext';
+import { auth } from '../../../lib/firebase';
+import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState({ emailError: "", passwordError: "" });
+  const navigate = useNavigate();
 
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')) || null)
+  const provider = new GoogleAuthProvider();
+  const { setUser } = useContext(AuthContext);
 
-  const [error, setError] = useState({
-    emailError: "",
-    passwordError: ""
-  });
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      console.log("Google user:", user.displayName, user.email);
+      navigate("/products");
+      toast.success(`Welcome, ${user.displayName || "User"} 👋`);
+    } catch (error) {
+      console.error("Google Sign-in error:", error);
+      toast.error("Google Sign-in failed");
+    }
+  };
 
-
-  function validateEmail(userEmail) {
+  const validateEmail = (userEmail) => {
     if (userEmail === "") {
-      setError(prev => ({ ...prev, emailError: "Email cannot be empty." }));
+      setError((prev) => ({ ...prev, emailError: "Email cannot be empty." }));
       return false;
     }
-    setError(prev => ({ ...prev, emailError: "" }));
+    setError((prev) => ({ ...prev, emailError: "" }));
     return true;
-  }
+  };
 
-  function validatePassword(userPassword) {
+  const validatePassword = (userPassword) => {
     if (userPassword === "") {
-      setError(prev => ({ ...prev, passwordError: "Password cannot be empty." }));
+      setError((prev) => ({ ...prev, passwordError: "Password cannot be empty." }));
       return false;
     }
-    setError(prev => ({ ...prev, passwordError: "" }));
+    setError((prev) => ({ ...prev, passwordError: "" }));
     return true;
-  }
-
-
-  const onEmailChange = (e) => {
-    setEmail(e.target.value);
-    validateEmail(e.target.value);
   };
 
-  const onPasswordChange = (e) => {
-    setPassword(e.target.value);
-    validatePassword(e.target.value);
-  };
-
-
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+    if (!validateEmail(email) || !validatePassword(password)) return;
 
-    const isEmailValid = validateEmail(email);
-    const isPasswordValid = validatePassword(password);
-
-    if (email !== user.email) {
-      setError(prev => ({ ...prev, emailError: "Invalid Email" }))
-    } else if (password !== user.password) {
-      setError(prev => ({ ...prev, passwordError: "Invalid Password" }))
-
-    } else {
-      alert("Login Successful");
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      if (userCredential.user) {
+        navigate("/products");
+        toast.success("User logged in successfully.");
+      }
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
   return (
-    // Your UI and colors are preserved.
-    <div className='h-screen flex justify-center items-center'>
-      <form className='bg-[#e0d3ffcd] border border-[#C2A6FF] rounded-[5px] w-full max-w-md p-2' onSubmit={handleLogin} noValidate>
-        <h1 className='text-center text-[#28262C] font-bold text-3xl mt-4'>LOG IN</h1>
-        <div className='px-5 my-5'>
-          <div className='my-2'>
-            <label htmlFor="email" className='block text-xl my-1 font-medium'>Email</label>
-            {/* **FIX: Added value and onChange handler.** */}
+    <div className="min-h-screen flex justify-center items-center bg-gray-50">
+      <div className="bg-white shadow-lg border border-gray-200 rounded-xl w-full max-w-md p-6">
+        <h1 className="text-center text-gray-900 font-bold text-3xl mb-6">
+          Log In
+        </h1>
+
+        <form onSubmit={handleLogin} className="space-y-4" noValidate>
+          {/* Email input */}
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Email
+            </label>
             <input
               type="email"
-              name="email"
               id="email"
               value={email}
-              onChange={onEmailChange}
-              autoComplete='off'
-              className='w-full py-2 px-2 my-1 border border-[#C2A6FF] outline outline-[#6f2ff9] rounded-[5px] bg-white placeholder:font-light placeholder:text-sm'
-              placeholder='enter your email'
+              onChange={(e) => { setEmail(e.target.value); validateEmail(e.target.value); }}
+              autoComplete="off"
+              className="w-full py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Enter your email"
             />
-            {/* This part was already correct. */}
-            {error.emailError && <span className='text-xs text-red-500'>{error.emailError}</span>}
+            {error.emailError && <span className="text-xs text-red-500">{error.emailError}</span>}
           </div>
-          <div className='my-2'>
-            <label htmlFor="password" className='block text-xl my-1 font-medium'>Password</label>
-            {/* **FIX: Added value and onChange handler.** */}
+
+          {/* Password input */}
+          <div>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              Password
+            </label>
             <input
               type="password"
-              name="password"
               id="password"
               value={password}
-              onChange={onPasswordChange}
-              autoComplete='off'
-              className='w-full py-2 px-2 my-1 border border-[#C2A6FF] outline outline-[#6f2ff9] rounded-[5px] bg-white placeholder:font-light placeholder:text-sm'
-              placeholder='enter your password'
+              onChange={(e) => { setPassword(e.target.value); validatePassword(e.target.value); }}
+              autoComplete="off"
+              className="w-full py-2 px-3 mt-1 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              placeholder="Enter your password"
             />
-            {/* **FIX: Replaced hardcoded message with dynamic error from state.** */}
-            {error.passwordError && <span className='text-xs text-red-500'>{error.passwordError}</span>}
+            {error.passwordError && <span className="text-xs text-red-500">{error.passwordError}</span>}
           </div>
 
-          {/* **FIX: Added type="submit" to the button.** */}
-          <button type="submit" className='block mx-auto p-2 bg-[#9565FF] w-full my-1 rounded-[5px] font-semibold text-white'>LOG IN</button>
+          {/* Submit button */}
+          <button
+            type="submit"
+            className="w-full py-2 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition"
+          >
+            Log In
+          </button>
+        </form>
 
-          <p className='text-center text-sm mt-3 text-gray-800'>New to Shopper? <a href="#" className='text-[#6600FF]'>Sign Up</a></p>
+        <div className="flex items-center my-6">
+          <hr className="flex-1 border-gray-300" />
+          <span className="px-2 text-sm text-gray-500">OR</span>
+          <hr className="flex-1 border-gray-300" />
         </div>
-      </form>
+
+        {/* Google Sign In button */}
+        <button
+          onClick={handleGoogleSignIn}
+          className="w-full py-2 flex items-center justify-center gap-2 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition"
+        >
+          <i className="bi bi-google"></i> Sign in with Google
+        </button>
+
+        <p className="text-center text-sm mt-6 text-gray-700">
+          New to Nile.co?{" "}
+          <span
+            onClick={() => navigate("/signup")}
+            className="text-indigo-600 font-medium cursor-pointer hover:underline"
+          >
+            Sign Up
+          </span>
+        </p>
+      </div>
     </div>
   );
-}
+};
 
-
-export default Login
+export default Login;

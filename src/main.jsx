@@ -1,17 +1,16 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom';
-// import WishListContextProvider from './assets/Context/WishListContext';
-
 import './index.css'
 import App from './App.jsx'
+import AuthProvider from './assets/Context/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
-      {/* <WishListContextProvider> */}
+    <AuthProvider>
+      <BrowserRouter>
         <App />
-      {/* </WishListContextProvider> */}
-    </BrowserRouter>
+      </BrowserRouter>
+    </AuthProvider>
   </StrictMode>,
 )

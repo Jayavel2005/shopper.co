@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import logo from "../../images/Icons/shopping-bag.png"
 import { useNavigate } from 'react-router-dom';
-
+import { AuthContext } from '../../Context/AuthContext';
+import { auth } from '../../../lib/firebase';
+import { signOut, onAuthStateChanged } from 'firebase/auth';
 const Navbar = () => {
 
     const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser)
+
+
+            console.log(`in the navbar ${currentUser.email}`);
+
+        });
+
+        return () => unsubscribe();
+    }, []);
+
+    const handleLogout = async () => {
+        const user = await signOut(auth);
+        navigate('/login')
+    }
 
     return (
         <nav className='shadow p-2 px-5 flex items-center justify-between'>
@@ -13,7 +33,7 @@ const Navbar = () => {
                 <p className='font-semibold text-xl'>Nile.co</p>
             </div>
             <div className='flex gap-5 justify-center items-center max-sm:hidden'>
-                <div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={() => navigate('/login')}> login</div>
+                {user ? (<div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={handleLogout}>Logout <i className="bi bi-box-arrow-right"></i></div>) : (<div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={() => navigate('/login')}>Login <i className='bi bi-box-arrow-in-right'></i> </div>)}
                 <div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={() => navigate('/wishlist')}><i className="bi bi-heart"></i> Wish List</div>
                 <div className='cursor-pointer hover:underline hover:underline-offset-4 '><i className="bi bi-cart"></i> My Bag</div>
             </div>

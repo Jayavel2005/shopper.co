@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react'
+import React, { use, useContext, useState } from 'react'
 import { Heart, Laptop, Shirt, Trash, Trash2, Backpack, Sofa, Glasses, Footprints } from "lucide-react"
 import { WishListContext } from '../../Context/WishListContext'
+import { useNavigate } from 'react-router-dom';
 
 const WishList = () => {
     const { wishList, removeFromWishList, clearWishList } = useContext(WishListContext);
@@ -15,11 +16,15 @@ const WishList = () => {
         { type: "Footwear", icon: <Footprints /> },
     ];
 
+
     const [selectedCategory, setSelectedCategory] = useState("All");
 
     function handleFilteredCategory(category) {
         setSelectedCategory(category);
     }
+
+    const navigate = useNavigate();
+
 
     const filteredCategory =
         selectedCategory === "All"
@@ -62,8 +67,9 @@ const WishList = () => {
                 {/* Wishlist Items */}
                 <div className="flex-1 p-3 rounded-lg">
                     {filteredCategory.length === 0 ? (
-                        <div className="w-full py-20 flex items-center justify-center">
+                        <div className="w-full py-20 flex flex-col items-center justify-center ">
                             <p className="text-neutral-500 text-lg">Your wishlist is empty.</p>
+                            <button className='my-5 bg-purple-500 p-3 rounded-xl cursor-pointer text-white hover:bg-purple-600' onClick={() => navigate('/products')}>Explore Products</button>
                         </div>
                     ) : (
                         filteredCategory.map((product) => (
