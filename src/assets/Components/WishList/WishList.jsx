@@ -109,7 +109,7 @@ const WishList = () => {
                                         <del className="text-neutral-500 text-xs">₹{product.price}</del>
                                         {product.offer && (
                                             <span className="bg-purple-100 text-purple-700 text-xs px-2 py-1 rounded-full">
-                                                {product.offer}
+                                                {product.offer}% off
                                             </span>
                                         )}
                                     </div>

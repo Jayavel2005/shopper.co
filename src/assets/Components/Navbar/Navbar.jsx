@@ -1,13 +1,20 @@
 import React, { useContext, useEffect, useState } from 'react'
 import logo from "../../images/Icons/shopping-bag.png"
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../Context/AuthContext';
+// import { AuthContext } from '../../Context/AuthContext';
 import { auth } from '../../../lib/firebase';
 import { signOut, onAuthStateChanged } from 'firebase/auth';
+import { CartContext } from "../../Context/CartContext";
+
 const Navbar = () => {
 
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
+    const { totalQuantity } = useContext(CartContext);
+    // const { addToCart, increment, decrement, removeItem, clearCartItem, cartItems, originalPrice } = useContext(CartContext);
+
+    // console.log(cartItems.length);
+
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -35,7 +42,7 @@ const Navbar = () => {
             <div className='flex gap-5 justify-center items-center max-sm:hidden'>
                 {user ? (<div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={handleLogout}>Logout <i className="bi bi-box-arrow-right"></i></div>) : (<div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={() => navigate('/login')}>Login <i className='bi bi-box-arrow-in-right'></i> </div>)}
                 <div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={() => navigate('/wishlist')}><i className="bi bi-heart"></i> Wish List</div>
-                <div className='cursor-pointer hover:underline hover:underline-offset-4 '><i className="bi bi-cart"></i> My Bag</div>
+                <div className='cursor-pointer hover:underline hover:underline-offset-4 relative' onClick={() => navigate('cart')}><i className="bi bi-cart"></i><span className='text-xs absolute bg-red-400 px-1 py-0.6 left-2 -top-1.5  rounded-full'>{totalQuantity}</span> My Bag</div>
             </div>
         </nav>
     )

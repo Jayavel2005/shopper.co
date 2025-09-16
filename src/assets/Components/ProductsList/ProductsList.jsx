@@ -5,7 +5,6 @@ import ProductDetails from '../ProductDetails/ProductDetails';
 import { WishListContext } from '../../Context/WishListContext';
 import { useNavigate } from 'react-router-dom';
 
-
 const ProductsList = () => {
     const categories = [
         "All",

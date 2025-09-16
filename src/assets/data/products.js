@@ -10,7 +10,7 @@ let products = [
     image: "src/assets/images/ProductImages/airpods.png",
     description: "OnePlus Nord Buds 2 with 25dB Active Noise Cancellation, 12.4mm drivers, fast charging, and up to 36 hours of battery life.",
     tags: ["wireless", "earbuds", "budget", "ANC", "OnePlus"],
-    offer: "10% off"
+    offer: 10
   },
   {
     id: 2,
@@ -23,7 +23,7 @@ let products = [
     image: "src/assets/images/ProductImages/bag.png",
     description: "Safari Quill unisex laptop backpack with 3 compartments, water-resistant fabric, and padded shoulder straps. Ideal for work, college, and travel.",
     tags: ["backpack", "safari", "laptop", "unisex", "college"],
-    offer: "15% off"
+    offer: 15
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ let products = [
     image: "src/assets/images/ProductImages/chair.png",
     description: "Ergonomic office chair with adjustable headrest, lumbar support, breathable mesh, and 360-degree swivel for all-day comfort.",
     tags: ["chair", "ergonomic", "office", "mesh", "greensoul"],
-    offer: "12% off"
+    offer: 12
   },
   {
     id: 4,
@@ -49,7 +49,7 @@ let products = [
     image: "src/assets/images/ProductImages/iphone.png",
     description: "Apple iPhone 14 with 6.1-inch Super Retina XDR display, A15 Bionic chip, advanced dual-camera system, and crash detection feature.",
     tags: ["smartphone", "apple", "iphone", "ios", "flagship"],
-    offer: "5% off"
+    offer: 5
   },
   {
     id: 5,
@@ -62,7 +62,7 @@ let products = [
     image: "src/assets/images/ProductImages/beigeCoat.png",
     description: "Elegant beige belted trench coat with a classic lapel collar, waist tie, and long sleeves. Perfect for layering in autumn and winter.",
     tags: ["coat", "trench", "beige", "women", "fashion"],
-    offer: "20% off"
+    offer: 20
   },
   {
     id: 6,
@@ -75,7 +75,7 @@ let products = [
     image: "src/assets/images/ProductImages/headphone.png",
     description: "boAt Rockerz 450 wireless on-ear headphones with immersive audio, adjustable headband, 15-hour playback, and dual connectivity (Bluetooth & AUX).",
     tags: ["headphones", "wireless", "boat", "audio", "bluetooth"],
-    offer: "18% off"
+    offer: 18
   },
   {
     id: 7,
@@ -88,7 +88,7 @@ let products = [
     image: "src/assets/images/ProductImages/leather watch.png",
     description: "Premium Fossil Grant chronograph watch with a genuine brown leather strap, stainless steel case, Roman numeral markers, and water resistance up to 50 meters.",
     tags: ["watch", "leather", "fossil", "chronograph", "premium"],
-    offer: "25% off"
+    offer: 25
   },
   {
     id: 8,
@@ -101,7 +101,7 @@ let products = [
     image: "src/assets/images/ProductImages/mechanical keyboard.png",
     description: "Compact mechanical gaming keyboard with custom mechanical switches, RGB backlighting, metal construction, and anti-ghosting for precise gaming performance.",
     tags: ["keyboard", "mechanical", "gaming", "rgb", "redragon"],
-    offer: "10% off"
+    offer: 10
   },
   {
     id: 9,
@@ -114,7 +114,7 @@ let products = [
     image: "src/assets/images/ProductImages/metalic watch.png",
     description: "Elegant Titan analog watch featuring a full black metallic strap and dial, quartz movement, scratch-resistant glass, and water resistance up to 50 meters.",
     tags: ["watch", "metallic", "black", "titan", "accessory"],
-    offer: "15% off"
+    offer: 15
   },
   {
     id: 10,
@@ -127,10 +127,10 @@ let products = [
     image: "src/assets/images/ProductImages/sneaker.png",
     description: "Classic white sneakers from Nike featuring a retro tennis-inspired design, durable synthetic leather upper, and comfortable cushioned sole for everyday wear.",
     tags: ["sneakers", "white", "nike", "footwear", "casual"],
-    offer: "30% off"
+    offer: 30
   },
   {
-    id: 11                                                                                     ,
+    id: 11,
     name: "Tommy Hilfiger Premium Brown Leather Wallet",
     category: "Accessories",
     brand: "Tommy Hilfiger",
@@ -140,7 +140,7 @@ let products = [
     image: "src/assets/images/ProductImages/wallet.png",
     description: "Premium quality brown leather wallet by Tommy Hilfiger featuring a slim design, multiple card slots, a coin pouch, and embossed branding.",
     tags: ["wallet", "leather", "brown", "tommy", "premium"],
-    offer: "20% off"
+    offer: 20
   }
 ];
 

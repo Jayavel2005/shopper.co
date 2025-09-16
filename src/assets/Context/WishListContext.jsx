@@ -19,15 +19,13 @@ const WishListContextProvider = (props) => {
         }
     }
 
+    const removeFromWishList = (product) => { setWishList(wishList.filter(item => item.id !== product.id)) }
+
     useEffect(() => {
         localStorage.setItem("wishList", JSON.stringify(wishList))
 
     }, [wishList])
 
-    const removeFromWishList = (product) => {
-        setWishList(wishList.filter(item => item.id !== product.id))
-        localStorage.setItem("wishList", JSON.stringify(wishList))
-    }
 
 
     const clearWishList = () => {
@@ -36,7 +34,7 @@ const WishListContextProvider = (props) => {
 
 
     return (
-        <WishListContext.Provider value={{ wishList, addToWishList, removeFromWishList,clearWishList }}>
+        <WishListContext.Provider value={{ wishList, addToWishList, clearWishList, removeFromWishList }}>
             {props.children}
         </WishListContext.Provider>
     )
