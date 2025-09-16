@@ -11,6 +11,7 @@ import { ToastContainer } from 'react-toastify';
 import Login from "./assets/Components/Login/Login"
 import SignUp from './assets/Components/SignUp/SignUp';
 import Cart from './assets/Components/Cart/Cart';
+import Checkout from './assets/Components/Checkout/Checkout';
 
 
 
@@ -22,6 +23,7 @@ const App = () => {
         <WishListContextProvider>
           <CartProvider>
             <Navbar />
+            <Checkout />
             <Routes>
               <Route path='/' element={<Home />} />
               <Route path='/login' element={<Login />} />
