@@ -12,6 +12,8 @@ import Login from "./assets/Components/Login/Login"
 import SignUp from './assets/Components/SignUp/SignUp';
 import Cart from './assets/Components/Cart/Cart';
 import Checkout from './assets/Components/Checkout/Checkout';
+import Orders from './assets/Components/Orders/Orders';
+import OrderContextProvider from './assets/Context/OrdersContext';
 
 
 
@@ -22,16 +24,20 @@ const App = () => {
         {/* The context provider should wrap the routes that need access to it */}
         <WishListContextProvider>
           <CartProvider>
-            <Navbar />
-            <Checkout />
-            <Routes>
-              <Route path='/' element={<Home />} />
-              <Route path='/login' element={<Login />} />
-              <Route path='/signup' element={<SignUp />} />
-              <Route path='/products' element={<ProductsList />} />
-              <Route path='/wishlist' element={<WishList />} />
-              <Route path='/cart' element={<Cart />} />
-            </Routes>
+            <OrderContextProvider>
+              <Navbar />
+              <Routes>
+                <Route path='/' element={<Home />} />
+                <Route path='/login' element={<Login />} />
+                <Route path='/signup' element={<SignUp />} />
+                <Route path='/products' element={<ProductsList />} />
+                <Route path='/wishlist' element={<WishList />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/checkout' element={<Checkout />} />'
+                <Route path='/orders' element={<Orders />} />
+
+              </Routes>
+            </OrderContextProvider>
           </CartProvider>
         </WishListContextProvider>
         {/* <WishListContextProvider>

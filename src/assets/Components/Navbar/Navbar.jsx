@@ -42,6 +42,10 @@ const Navbar = () => {
             <div className='flex gap-5 justify-center items-center max-sm:hidden'>
                 {user ? (<div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={handleLogout}>Logout <i className="bi bi-box-arrow-right"></i></div>) : (<div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={() => navigate('/login')}>Login <i className='bi bi-box-arrow-in-right'></i> </div>)}
                 <div className='cursor-pointer hover:underline hover:underline-offset-4 ' onClick={() => navigate('/wishlist')}><i className="bi bi-heart"></i> Wish List</div>
+
+
+                <div className='cursor-pointer hover:underline hover:underline-offset-4 relative' onClick={() => navigate('/orders')}>Orders</div>
+
                 <div className='cursor-pointer hover:underline hover:underline-offset-4 relative' onClick={() => navigate('cart')}><i className="bi bi-cart"></i><span className='text-xs absolute bg-red-400 px-1 py-0.6 left-2 -top-1.5  rounded-full'>{totalQuantity}</span> My Bag</div>
             </div>
         </nav>

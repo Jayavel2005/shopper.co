@@ -148,7 +148,7 @@ const Cart = () => {
                   <span>₹{originalPrice - discountPrice}</span>
                 </div>
               </div>
-              <button className="w-full mt-6 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700">
+              <button className="w-full mt-6 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700" onClick={() => navigate('/checkout')}>
                 Place Order
               </button>
             </div>

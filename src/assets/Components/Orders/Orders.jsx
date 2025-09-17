@@ -1,8 +1,8 @@
 import { useContext } from "react";
-import { OrderContext } from "../../Context/OrderContext";
+import { OrdersContext } from "../../Context/OrdersContext";
 
 export default function Orders() {
-  const { orders } = useContext(OrderContext);
+  const { orders } = useContext(OrdersContext);
 
   if (orders.length === 0) {
     return <p className="text-center mt-10">No orders placed yet.</p>;
@@ -12,20 +12,20 @@ export default function Orders() {
     <div className="p-6 max-w-4xl mx-auto">
       <h2 className="text-2xl font-bold mb-6">My Orders</h2>
       <div className="space-y-6">
-        {orders.map((order) => (
+        {orders.map((order, index) => (
           <div
-            key={order.id}
+            key={index}
             className="border p-4 rounded-lg shadow-sm bg-white"
           >
             <h3 className="font-semibold text-lg">
-              Order #{order.id} - {order.date}
+              Order #{order.orderId}
             </h3>
-            <p className="text-gray-600">Name: {order.customer.name}</p>
-            <p className="text-gray-600">Email: {order.customer.email}</p>
-            <p className="text-gray-600">Payment: {order.customer.payment}</p>
+            <p className="text-gray-600">Name: {order.customerDetails.name}</p>
+            <p className="text-gray-600">Email: {order.customerDetails.email}</p>
+            <p className="text-gray-600">Payment: {order.customerDetails.payment}</p>
 
             <div className="mt-4 space-y-3">
-              {order.items.map((item, idx) => (
+              {order.cartItems.map((item, idx) => (
                 <div
                   key={idx}
                   className="flex items-center justify-between border-b pb-2"

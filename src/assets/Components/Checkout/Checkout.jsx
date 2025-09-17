@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../../Context/CartContext";
+import { OrdersContext } from "../../Context/OrdersContext";
 
 export default function Checkout() {
-  const { cartItems, originalPrice, discountPrice } = useContext(CartContext);
+  const { cartItems, originalPrice, discountPrice, clearCartItem } = useContext(CartContext);
+  const { updateOrders } = useContext(OrdersContext);
 
   const [customerDetails, setCustomerDetails] = useState({
     name: "",
@@ -59,8 +61,13 @@ export default function Checkout() {
       const orderData = {
         customerDetails,
         cartItems,
+        orderDate: new Date().toLocaleDateString(),
+        orderId: "ORD-" + Date.now() + "-" + Math.floor(Math.random() * 1000),
         total: originalPrice - discountPrice,
       };
+
+      updateOrders(orderData)
+      clearCartItem();
 
       console.log("✅ Order Placed:", orderData);
 
@@ -185,9 +192,8 @@ export default function Checkout() {
               {["Credit/Debit Card", "UPI", "Cash on Delivery"].map((method) => (
                 <label
                   key={method}
-                  className={`flex items-center gap-2 border rounded-lg p-2 cursor-pointer ${
-                    customerDetails.payment === method ? "border-purple-500" : ""
-                  }`}
+                  className={`flex items-center gap-2 border rounded-lg p-2 cursor-pointer ${customerDetails.payment === method ? "border-purple-500" : ""
+                    }`}
                 >
                   <input
                     type="radio"
