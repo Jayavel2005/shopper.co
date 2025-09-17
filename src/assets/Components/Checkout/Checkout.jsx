@@ -1,10 +1,29 @@
 import { useContext, useState } from "react";
 import { CartContext } from "../../Context/CartContext";
 import { OrdersContext } from "../../Context/OrdersContext";
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+import 'sweetalert2/src/sweetalert2.scss'
+import { useNavigate } from "react-router-dom";
 
 export default function Checkout() {
   const { cartItems, originalPrice, discountPrice, clearCartItem } = useContext(CartContext);
   const { updateOrders } = useContext(OrdersContext);
+
+  const navigate = useNavigate();
+
+  const showMe = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Order Placed!",
+      text: "Your order has been completed successfully 🎉",
+      confirmButtonColor: "#6b21a8" // purple button
+
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/products')
+      }
+    })
+  }
 
   const [customerDetails, setCustomerDetails] = useState({
     name: "",
@@ -68,7 +87,6 @@ export default function Checkout() {
 
       updateOrders(orderData)
       clearCartItem();
-
       console.log("✅ Order Placed:", orderData);
 
       // For now just reset form
@@ -83,7 +101,9 @@ export default function Checkout() {
         payment: "",
       });
       setErrors({});
-      alert("Order placed successfully!");
+      showMe();
+
+
     }
   };
 

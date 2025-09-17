@@ -1,11 +1,17 @@
 import { useContext } from "react";
 import { OrdersContext } from "../../Context/OrdersContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Orders() {
   const { orders } = useContext(OrdersContext);
+  const navigate = useNavigate();
 
   if (orders.length === 0) {
-    return <p className="text-center mt-10">No orders placed yet.</p>;
+    return (<>
+      <p className="text-center mt-10">No orders placed yet.</p>
+      <button className="bg-purple-500 p-2 rounded-md text-white mx-auto block my-3" onClick={() => navigate('/products')}>Explore Products</button></>
+    )
+
   }
 
   return (
@@ -49,7 +55,7 @@ export default function Orders() {
             </div>
 
             <div className="mt-3 font-bold text-lg text-right">
-              Total: ₹{order.total}
+              Total: ₹{order.total.toFixed(2)}
             </div>
           </div>
         ))}

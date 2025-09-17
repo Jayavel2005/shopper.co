@@ -1,11 +1,15 @@
-import { createContext , useState} from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const OrdersContext = createContext();
 
 
 const OrderContextProvider = ({ children }) => {
 
-    const [orders, setOrders] = useState([]);
+    const [orders, setOrders] = useState(JSON.parse(localStorage.getItem("orders")) || []);
+
+    useEffect(() => {
+        localStorage.setItem('orders', JSON.stringify(orders))
+    }, [orders])
 
     const updateOrders = (newOrder) => {
         setOrders(prev => [...prev, newOrder])

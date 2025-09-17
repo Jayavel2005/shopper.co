@@ -1,12 +1,15 @@
 import React, { useContext } from 'react'
 import { WishListContext } from '../../../Context/WishListContext';
 import { CartContext } from '../../../Context/CartContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProductCard = ({ product, setProductDetails }) => {
 
     const { addToWishList, wishList } = useContext(WishListContext);
-    const { addToCart, increment, decrement, removeItem, clearCartItem, cartItems, originalPrice } = useContext(CartContext);
+    const { addToCart, increment, decrement, removeItem, clearCartItem, cartItems, originalPrice, directBuyNow } = useContext(CartContext);
+    const navigate = useNavigate();
+
 
 
 
@@ -37,7 +40,7 @@ const ProductCard = ({ product, setProductDetails }) => {
                     <div className='flex items-center gap-2'><p className='text-xl font-medium my-1 px-1'>₹ {product.price}</p> <span className='text-emerald-600 text-[15px] font-medium'>{product.offer}% off</span></div>
                 </div>
 
-                <button className='p-2 bg-[#9565FF] text-white my-1 w-full rounded-[5px] cursor-pointer hover:bg-[#8754ff]'>Buy Now</button>
+                <button className='p-2 bg-[#9565FF] text-white my-1 w-full rounded-[5px] cursor-pointer hover:bg-[#8754ff]' onClick={() => { directBuyNow(product), navigate('/checkout') }}>Buy Now</button>
             </div>
 
         </div >

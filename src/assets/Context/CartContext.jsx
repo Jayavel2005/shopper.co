@@ -1,10 +1,14 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 // import products from "../data/products";
 
 export const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem("cart")) || []);
+
+    useEffect(() => {
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const addToCart = (product) => {
         const existingItem = cartItems.find((item) => item.id === product.id);
@@ -31,6 +35,17 @@ const CartProvider = ({ children }) => {
             ]);
         }
     };
+
+    const directBuyNow = (product) => {
+        setCartItems(prev => [...prev, {
+            id: product.id, // keep consistent
+            name: product.name,
+            image: product.image,
+            price: product.price,
+            discount: product.offer,
+            quantity: 1,
+        }])
+    }
 
     const increment = (product) => {
         setCartItems((prev) =>
@@ -67,7 +82,7 @@ const CartProvider = ({ children }) => {
 
     );
 
-    const discountPrice = cartItems.reduce((acc, item) => acc +  (item.quantity * item.price * item.discount / 100), 0);
+    const discountPrice = cartItems.reduce((acc, item) => acc + (item.quantity * item.price * item.discount / 100), 0);
 
 
     const totalQuantity = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -88,7 +103,8 @@ const CartProvider = ({ children }) => {
                 clearCartItem,
                 originalPrice,
                 totalQuantity,
-                discountPrice
+                discountPrice,
+                directBuyNow
             }}
         >
             {children}

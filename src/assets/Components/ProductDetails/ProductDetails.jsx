@@ -3,11 +3,16 @@ import { useContext } from 'react';
 import { WishListContext } from '../../Context/WishListContext';
 import { Tag, Star, Zap, ShoppingCart } from 'lucide-react';
 import { CartContext } from '../../Context/CartContext';
+import { CheckoutContext } from '../../Context/CheckoutContext';
+import { useNavigate } from 'react-router-dom';
 
 
 const ProductDetails = ({ selectedProductdetail, removeSeletecdProduct }) => {
   const { addToWishList, removeFromWishList, wishList, isWishListed } = useContext(WishListContext);
   const { addToCart } = useContext(CartContext);
+  // const { buyNow, clearCheckout } = useContext(CheckoutContext);
+  const navigate = useNavigate();
+
   return (
     <>
       <button className='flex  items-center gap-1 p-1 text-[#8754ff] cursor-pointer' onClick={removeSeletecdProduct}><i className="bi bi-arrow-left-circle-fill text-xl"></i> Back to Products</button>
@@ -25,7 +30,7 @@ const ProductDetails = ({ selectedProductdetail, removeSeletecdProduct }) => {
 
           <div className='flex items-center gap-3'><span className='bg-green-600 rounded-sm text-amber-50 px-1.5 my-2 py-0 text-sm flex items-center gap-1'><Star width={14} /> {selectedProductdetail.rating}</span> <span className='text-gray-500 text-sm'>86 ratings & 105 reviews</span></div>
 
-          <div className='flex items-center gap-3'><span className='text-3xl my-2 font-bold'>₹ {Math.floor(selectedProductdetail.price - selectedProductdetail.price * 15 / 100)} </span> <del>₹ {selectedProductdetail.price}</del> <span className='text-emerald-600 font-semibold'>{selectedProductdetail.offer}</span></div>
+          <div className='flex items-center gap-3'><span className='text-3xl my-2 font-bold'>₹ {Math.floor(selectedProductdetail.price - selectedProductdetail.price * 15 / 100)} </span> <del>₹ {selectedProductdetail.price}</del> <span className='text-emerald-600 font-semibold'>{selectedProductdetail.offer}% off</span></div>
 
 
           <div className='text-lg bg-green-500 inline-flex items-center justify-center gap-2 hover:bg-green-600 text-neutral-50 my-2 px-3 py-1 rounded-full'><Tag width={16} /> <p className='text-[15px]'>{selectedProductdetail.brand}</p></div>
@@ -33,7 +38,7 @@ const ProductDetails = ({ selectedProductdetail, removeSeletecdProduct }) => {
 
           <div className='sm:gap-5 gap-3 my-3 flex  max-sm:flex-col'>
             <button className='bg-purple-500 p-4 text-white font-semibold cursor-pointer hover:shadow hover:shadow-purple-300 transition-all rounded-md inline-flex ' onClick={() => addToCart(selectedProductdetail)}><ShoppingCart width={20} /> &nbsp; ADD TO CART</button>
-            <button className='bg-purple-600 p-4 text-white font-semibold cursor-pointer hover:shadow hover:shadow-purple-300 transition-all rounded-md inline-flex'><Zap width={20} />&nbsp; BUY NOW</button>
+            <button className='bg-purple-600 p-4 text-white font-semibold cursor-pointer hover:shadow hover:shadow-purple-300 transition-all rounded-md inline-flex' onClick={() => { addToCart(selectedProductdetail), navigate('/checkout') }}><Zap width={20} />&nbsp; BUY NOW</button>
           </div>
 
         </div>

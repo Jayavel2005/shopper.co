@@ -14,6 +14,7 @@ import Cart from './assets/Components/Cart/Cart';
 import Checkout from './assets/Components/Checkout/Checkout';
 import Orders from './assets/Components/Orders/Orders';
 import OrderContextProvider from './assets/Context/OrdersContext';
+import CheckoutContextProvider from './assets/Context/CheckoutContext';
 
 
 
@@ -25,18 +26,21 @@ const App = () => {
         <WishListContextProvider>
           <CartProvider>
             <OrderContextProvider>
-              <Navbar />
-              <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/login' element={<Login />} />
-                <Route path='/signup' element={<SignUp />} />
-                <Route path='/products' element={<ProductsList />} />
-                <Route path='/wishlist' element={<WishList />} />
-                <Route path='/cart' element={<Cart />} />
-                <Route path='/checkout' element={<Checkout />} />'
-                <Route path='/orders' element={<Orders />} />
+              <CheckoutContextProvider>
+                <Navbar />
+                <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/signup' element={<SignUp />} />
+                  <Route path='/products' element={<ProductsList />} />
+                  <Route path='/wishlist' element={<WishList />} />
+                  <Route path='/cart' element={<Cart />} />
+                  <Route path='/checkout' element={<Checkout />} />'
+                  <Route path='/orders' element={<Orders />} />
 
-              </Routes>
+                </Routes>
+              </CheckoutContextProvider>
+
             </OrderContextProvider>
           </CartProvider>
         </WishListContextProvider>

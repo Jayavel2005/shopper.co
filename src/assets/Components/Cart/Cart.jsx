@@ -145,7 +145,7 @@ const Cart = () => {
                 </div>
                 <div className="flex justify-between font-semibold text-lg border-t pt-2">
                   <span>Total Price</span>
-                  <span>₹{originalPrice - discountPrice}</span>
+                  <span>₹{(originalPrice - discountPrice).toFixed(2)}</span>
                 </div>
               </div>
               <button className="w-full mt-6 bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700" onClick={() => navigate('/checkout')}>
